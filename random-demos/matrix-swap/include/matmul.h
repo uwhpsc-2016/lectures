@@ -1,11 +1,7 @@
-#ifndef lecture_matmul_hpp
-#define lecture_matmul_hpp
+#ifndef lecture_matmul_h
+#define lecture_matmul_h
 
-#include <cstddef>
-#include <vector>
-
-using std::vector;
-using std::size_t;
+#include <stdlib.h>
 
 /*
   matmul_naive
@@ -20,8 +16,8 @@ using std::size_t;
 
   Parameters
   ----------
-  A : const matrix&
-  B : const matrix&
+  A : double*
+  B : double*
       The input matrices.
   M : size_t
   N : size_t
@@ -30,12 +26,11 @@ using std::size_t;
 
   Returns
   -------
-  C : matrix&
-      The output matrix.
+  C : double*
+      The output matrix. Return by reference.
 
 */
-void matmul_naive(const vector<double>&, const vector<double>&, vector<double>&,
-                  size_t, size_t, size_t);
+void matmul_naive(double*, double*, double *, size_t, size_t, size_t);
 
 /*
   matmul_swap
@@ -50,8 +45,8 @@ void matmul_naive(const vector<double>&, const vector<double>&, vector<double>&,
 
   Parameters
   ----------
-  A : const matrix&
-  B : const matrix&
+  A : double*
+  B : double*
       The input matrices.
   M : size_t
   N : size_t
@@ -60,11 +55,9 @@ void matmul_naive(const vector<double>&, const vector<double>&, vector<double>&,
 
   Returns
   -------
-  C : matrix&
-      The output matrix.
-
+  C : double*
+      The output matrix. Return by reference.
 */
-void matmul_swap(const vector<double>&, const vector<double>&, vector<double>&,
-                 size_t, size_t, size_t);
+void matmul_swap(double*, double*, double *, size_t, size_t, size_t);
 
 #endif

@@ -1,5 +1,5 @@
 set (SRCS
-  matmul.cpp
+  matmul.c
 )
 
 add_library (lecture_matmul SHARED ${SRCS})

@@ -1,8 +1,4 @@
-#include <cstddef>
-#include <vector>
-
-using std::vector;
-using std::size_t;
+#include <stdlib.h>
 
 /*
   matmul_naive
@@ -18,10 +14,8 @@ using std::size_t;
       C[i][j] = < A[i][:], B[:][j] >
 
 */
-void matmul_naive(const vector<double>& A,
-                    const vector<double>& B,
-                    vector<double>& C,
-                    size_t M, size_t N, size_t K)
+void matmul_naive(double* A, double* B, double* C,
+                  size_t M, size_t N, size_t K)
 {
   for (size_t i=0; i<M; ++i)
     for (size_t j=0; j<K; ++j)
@@ -45,10 +39,8 @@ void matmul_naive(const vector<double>& A,
   `B[K*k+(K-1)]`) but storing results in an entire row of `C` (elements `C[K*i]`
   to `C[K*i+(K-1)]`). Each of these chunks of memory are contiguous.
 */
-void matmul_swap(const vector<double>& A,
-                    const vector<double>& B,
-                    vector<double>& C,
-                    size_t M, size_t N, size_t K)
+void matmul_swap(double* A, double* B, double* C,
+                 size_t M, size_t N, size_t K)
 {
   for (size_t i=0; i<M; ++i)
     for (size_t k=0; k<N; ++k)  // swapped
