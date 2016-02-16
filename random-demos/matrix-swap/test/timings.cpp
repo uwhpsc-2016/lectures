@@ -7,7 +7,6 @@
 #include <random>
 #include <vector>
 
-
 using std::size_t;
 
 int main(int argc, char** argv)
@@ -47,23 +46,23 @@ int main(int argc, char** argv)
   std::chrono::duration<double> elapsed_seconds = end - start;
   std::cout << "time (naive): " << elapsed_seconds.count() << std::endl;
 
-  // // compute and time using swapped algorithm
-  // start = std::chrono::system_clock::now();
+  // compute and time using swapped algorithm
+  start = std::chrono::system_clock::now();
 
-  // matmul_swap(A, B, C_swap, M, N, K);
+  matmul_swap(A, B, C_swap, M, N, K);
 
-  // end = std::chrono::system_clock::now();
-  // elapsed_seconds = end - start;
-  // std::cout << "time (swap):  " << elapsed_seconds.count() << std::endl;
+  end = std::chrono::system_clock::now();
+  elapsed_seconds = end - start;
+  std::cout << "time (swap):  " << elapsed_seconds.count() << std::endl;
 
-  // // check that the results are equal
-  // bool equal = true;
-  // for (size_t n=0; n<M*K; ++n)
-  //   if (std::abs(C_naive[n] - C_swap[n]) > 1e-12)
-  //     equal = false;
+  // check that the results are equal
+  bool equal = true;
+  for (size_t n=0; n<M*K; ++n)
+    if (std::abs(C_naive[n] - C_swap[n]) > 1e-12)
+      equal = false;
 
-  // if (not equal)
-  //   std::cout << "\tMATRICES NOT EQUAL" << std::endl;
+  if (not equal)
+    std::cout << "\tMATRICES NOT EQUAL" << std::endl;
 
   std::cout << "[Done]" << std::endl;
   return 0;

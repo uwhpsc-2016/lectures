@@ -1,7 +1,11 @@
-#ifndef lecture__matmul_hpp
-#define lecture__matmul_hpp
+#ifndef lecture_matmul_hpp
+#define lecture_matmul_hpp
 
 #include <cstddef>
+#include <vector>
+
+using std::vector;
+using std::size_t;
 
 /*
   matmul_naive
@@ -30,9 +34,8 @@
       The output matrix.
 
 */
-
-template <typename T>
-void matmul_naive(const T&, const T&, T&, std::size_t, std::size_t, std::size_t);
+void matmul_naive(const vector<double>&, const vector<double>&, vector<double>&,
+                  size_t, size_t, size_t);
 
 /*
   matmul_swap
@@ -61,8 +64,7 @@ void matmul_naive(const T&, const T&, T&, std::size_t, std::size_t, std::size_t)
       The output matrix.
 
 */
-
-template <typename T>
-void matmul_swap(const T&, const T&, T&, std::size_t, std::size_t, std::size_t);
+void matmul_swap(const vector<double>&, const vector<double>&, vector<double>&,
+                 size_t, size_t, size_t);
 
 #endif

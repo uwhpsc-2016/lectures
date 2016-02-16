@@ -1,9 +1,9 @@
 set (test_list
-  main.cpp)
+  timings.cpp)
 
 foreach (test ${test_list})
   string (REPLACE ".cpp" "" test ${test})
   add_executable (${test} ${PROJECT_SOURCE_DIR}/test/${test}.cpp)
-  target_link_libraries (${test} lecture_matmul m)
+  target_link_libraries (${test} lecture_matmul)
   add_test (${test} ${test})
 endforeach (test)
