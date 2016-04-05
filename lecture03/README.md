@@ -1,7 +1,5 @@
 # Lecture 3 - Introduction to Numpy and Matplotlib
 
-Key functions to cover:
-
 Numpy:
 
 * arrays
@@ -16,6 +14,10 @@ Numpy:
   * `linspace`
   * `zeros_like`
   * `empty_like`
+* functions and arithmetic
+  * adding and "multiplying" arrays
+  * difference from Python functions
+  * performance considerations
 * matrix-like manipulations
   * `numpy.dot`
   * `numpy.linalg.inv`
@@ -25,9 +27,6 @@ Numpy:
   * `diag`
   * `tril`
   * `numpy.linalg.norm`
-* functions
-  * difference from Python functions
-
 
 Matplotlib:
 
