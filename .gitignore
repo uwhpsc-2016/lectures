@@ -1,5 +1,5 @@
 # keynote files
-.key
+*.key
 
 # Compiled Object files
 *.slo
