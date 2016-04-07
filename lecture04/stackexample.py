@@ -29,6 +29,9 @@ def foobar(x):
 if __name__ == '__main__':
     print 'Starting script...'
 
+    import pdb;
+    pdb.set_trace()
+
     x = 2
     result = foo(x)
 
