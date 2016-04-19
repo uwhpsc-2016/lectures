@@ -2,5 +2,5 @@
 
 void sub2()
 {
-  printf("In sub2\n");
+  printf("In sub2, ya'll\n");
 }
