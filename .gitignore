@@ -1,3 +1,6 @@
+# sage terminal times
+*.term
+
 # keynote files
 *.key
 
