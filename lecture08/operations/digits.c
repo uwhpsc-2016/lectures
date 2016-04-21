@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <time.h>
 
-unsigned int digits_naive(unsigned long v) {
+unsigned int digits_naive(unsigned long v)
+{
   unsigned int result = 0;
   do
     {
@@ -12,12 +13,13 @@ unsigned int digits_naive(unsigned long v) {
   return result;
 }
 
-unsigned int digits_fast(unsigned long v) {
+unsigned int digits_fast(unsigned long v)
+{
   unsigned int result = 1;
 
   // appears to be an infinite loop but will always terminate because one of the
   // return conditions below will eventually be true
-  for (;;)
+  while (1)
     {
       // assume that "most numbers are small". comparison is very cheap.
       if (v < 10) return result;
