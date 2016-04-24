@@ -21,7 +21,7 @@ void matmul_naive(double* C, double* A, double* B,
   for (size_t i=0; i<M; ++i)
     for (size_t j=0; j<K; ++j)
       for (size_t k=0; k<N; ++k)
-        C[K*i + j] += A[N*i + k] * B[K*k + j];
+        C[i*K + j] += A[i*N + k] * B[k*K + j];
 }
 
 /*
@@ -46,7 +46,7 @@ void matmul_fast(double* C, double* A, double* B,
   for (size_t i=0; i<M; ++i)
     for (size_t k=0; k<N; ++k)  // swapped
       for (size_t j=0; j<K; ++j)  // swapped
-        C[K*i + j] += A[N*i + k] * B[K*k + j];
+        C[i*K + j] += A[i*N + k] * B[k*K + j];
 }
 
 
