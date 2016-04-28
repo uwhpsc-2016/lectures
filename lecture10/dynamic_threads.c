@@ -28,7 +28,7 @@ int main(int argc, char** argv)
   omp_set_num_threads(number_of_threads);
 
   // this block will now execute with `number_of_threads` threads
-#pragma omp parallel
+  #pragma omp parallel
   {
     // assign to the local variable `id` (local to the current thread) the
     // current thread's unique identification number
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
   number_of_threads >>= 1;  // fancy way of writing: "x /= 2" or "x = x/2"
   omp_set_num_threads(number_of_threads);
 
-#pragma omp parallel
+  #pragma omp parallel
   {
     int id = omp_get_thread_num();
     printf("(Second block) Thread %d / %d\n", id, number_of_threads);
