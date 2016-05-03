@@ -19,9 +19,13 @@ int min(int a, int b)
     "value" is set equal to one of the two following values depending on the
     result of "condition"
 
-    * conditon == true:   "value" set to "value1"
+    * condition == true:   "value" set to "value1"
     * condition == false: "value" set to "value2"
    */
+  /* if (a<b) */
+  /*   return a; */
+  /* else */
+  /*   return b; */
   return (a < b ? a : b);
 }
 
@@ -29,7 +33,7 @@ int min(int a, int b)
 int main(int argc, char** argv)
 {
   // get the problem size
-  int N = 1000;
+  int N = 1024;
   if (argc > 1)
     N = atoi(argv[1]);
 
@@ -49,7 +53,7 @@ int main(int argc, char** argv)
 
     Find and print the minimum in serial
   */
-  int minimum = INT_MAX - 1;
+  int minimum = INT_MAX;
   for (int i=0; i<N; ++i)
     minimum = min(minimum, a[i]);
   printf("Serial min:   %d\n", minimum);
@@ -62,25 +66,40 @@ int main(int argc, char** argv)
     critical section that each thread will execute one at a time. This is to
     make sure the minimum is correctly computed.
   */
-  minimum = INT_MAX - 1;
-  #pragma omp parallel shared(a) num_threads(4)
+  minimum = INT_MAX;
+  #pragma omp parallel shared(a,minimum) num_threads(4)
   {
     int local_minimum = minimum;
+    int temp;
 
+    // determine local minimum for current chunk.
+    //
     // optional: add "nowait" to omp for
-    #pragma omp for schedule(static) nowait
+    #pragma omp for nowait
     for (int i=0; i<N; ++i)
       local_minimum = min(local_minimum, a[i]);
 
-    // simulate big computation
-    double dummy = 0;
-    for (int j=0; j<10000; ++j)
-      dummy += 0.001*j;
-
-    // update
+    // now determine minimum from each thread's work
+    //
+    // (OMIT omp critical to see race condition effects. may need to run
+    // multiple times.)
     #pragma omp critical
     {
-      minimum = min(local_minimum, minimum);
+      temp = min(local_minimum, minimum);
+
+      // do some dummy work to illustrate potential issues if this were not a
+      // critical section. i.e. encountering race conditions. that is, becuase
+      // the line
+      //
+      // minimum = min(local_minimum, minimum)
+      //
+      // contains few instructions it is very rare to encounter a race condition
+      // (though possible!)
+      for(int j=0; j<100000; ++j)
+        local_minimum += 0.0001*j;
+
+      // actually set the minimum
+      minimum = temp;
     }
   }
 
