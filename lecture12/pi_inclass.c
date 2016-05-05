@@ -30,17 +30,13 @@ int main(int argc, char** argv)
   {
     int id = omp_get_thread_num();
     double dx = 1.0 / (double) N;
-    double thread_partial_sum = 0.0;
 
-    #pragma omp for schedule(static,10000)
+    #pragma omp for reduction(+:pi_approx)
     for (int i=0; i<N; ++i)
       {
         xi = (i + 0.5)*dx;
-        thread_partial_sum += 4.0 / (1.0 + xi*xi) * dx;
+        pi_approx += 4.0 / (1.0 + xi*xi) * dx;
       }
-    
-    #pragma omp atomic
-    pi_approx += thread_partial_sum;
   }
 
   end = omp_get_wtime();
