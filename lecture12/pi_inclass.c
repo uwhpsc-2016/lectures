@@ -25,36 +25,28 @@ int main(int argc, char** argv)
   double pi_approx = 0.0;
   double xi;
 
-  // array to store the partial sums and initialize
-  double* partial_sums = (double*) malloc(num_threads * sizeof(double));
-  for (int j=0; j<num_threads; ++j)
-    partial_sums[j] = 0.0;
-
-
   double end, start = omp_get_wtime();
-
   #pragma omp parallel private(xi)
   {
     int id = omp_get_thread_num();
     double dx = 1.0 / (double) N;
-    int nthreads = num_threads;
+    double thread_partial_sum = 0.0;
 
-    for (int i=id; i<N; i += nthreads)
+    #pragma omp for schedule(static,10000)
+    for (int i=0; i<N; ++i)
       {
         xi = (i + 0.5)*dx;
-        partial_sums[id] += 4.0 / (1.0 + xi*xi) * dx;
+        thread_partial_sum += 4.0 / (1.0 + xi*xi) * dx;
       }
+    
+    #pragma omp atomic
+    pi_approx += thread_partial_sum;
   }
-  // finally, sum up partial results
-  for (int k=0; k<num_threads; ++k)
-    pi_approx += partial_sums[k];
 
   end = omp_get_wtime();
   printf("pi_actual = %.15f\n", pi_actual);
   printf("pi_approx = %.15f\n", pi_approx);
   printf("error:    = %e\n", fabs(pi_actual - pi_approx));
   printf("\ntime: %f sec\n", end - start);
-
-  free(partial_sums);
   return 0;
 }
