@@ -5,7 +5,7 @@
 
 void print_array(long* array, size_t length)
 {
-  sprintf("[");
+  printf("[");
   for (size_t i=0; i<length; ++i)
     printf(" %ld,", array[i]);
   printf("]\n");

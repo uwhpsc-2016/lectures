@@ -35,6 +35,7 @@ def say_hello(comm):
     a = numpy.ascontiguousarray(numpy.zeros(N, dtype=numpy.double))
     libhello.say_hello(a.ctypes.data, N, comm_val)
 
+    print '%d ---- test: %s'%(comm.rank, a)
     if (comm.rank == 0):
         return a
     else:
