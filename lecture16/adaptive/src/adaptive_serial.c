@@ -95,7 +95,7 @@ double _quadrature_adaptive_serial(double (*f)(double), double a, double b, doub
   quadrature_adaptive_serial() as easy to use as possible.
 */
 double quadrature_adaptive_serial(double (*f)(double), double a, double b, double tol,
-                                  double* err)
+                                  double* err, char* fname)
 {
   double integral = 0.0;
 
@@ -103,7 +103,7 @@ double quadrature_adaptive_serial(double (*f)(double), double a, double b, doubl
   // script will read in these data and use the information to generate some
   // diagnostic plots. (also print csv headers)
   FILE *fp;
-  fp = fopen("./diagnostics.csv", "w");
+  fp = fopen(fname, "w");
   if (!fp)
     {
       printf("\nERROR - Could not open diagnostic file.\n");

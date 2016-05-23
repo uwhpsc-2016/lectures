@@ -22,7 +22,8 @@ int main(int argc, char** argv)
 
   double err;
   double integral;
-  integral = quadrature_adaptive_serial(integrand, -2, 4, tol, &err);
+  integral = quadrature_adaptive_serial(integrand, -2, 4, tol, &err,
+                                        "diagnostics.csv");
 
   printf("integral:  %f\n", integral);
   printf("(actual:   %f)\n", ACTUAL);

@@ -16,7 +16,7 @@ LIBTARGET=$(LIB)/libadaptive.so
 # sources
 LIBSOURCES=$(SRC)/adaptive_serial.c
 LIBOBJECTS=$(LIBSOURCES:.c=.o)
-TESTSOURCES=$(TEST)/test_serial.c
+TESTSOURCES=$(TEST)/test_serial.c $(TEST)/test_parallel.c
 TESTPROGRAMS=$(TESTSOURCES:.c=.out)
 
 .PHONY: all lib test clean clobber

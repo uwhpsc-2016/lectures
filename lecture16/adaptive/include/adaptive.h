@@ -33,6 +33,9 @@
   err : double*
       A return-by-reference estimate of the actual error in the adaptive
       integration routine.
+  fname : string
+      Name of file to write diagnostic results to. Sort of breaks the philosophy of
+      this function hiding the internals but...this is easy for now.
 
   Returns
   -------
@@ -42,6 +45,6 @@
       Return-by-reference of the estimated error.
  */
 double quadrature_adaptive_serial(double (*f)(double), double a, double b,
-                                  double tol, double* err);
+                                  double tol, double* err, char* fname);
 
 #endif
