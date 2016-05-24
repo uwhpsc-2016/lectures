@@ -47,4 +47,9 @@
 double quadrature_adaptive_serial(double (*f)(double), double a, double b,
                                   double tol, double* err, char* fname);
 
+// same as above, but allows OpenMP parallel constructs
+double quadrature_adaptive_parallel(double (*f)(double), double a, double b,
+                                    double tol, double* err, char* fname);
+
+
 #endif
